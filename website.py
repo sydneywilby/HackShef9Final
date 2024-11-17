@@ -67,15 +67,6 @@ oauth.register(
 @app.route("/")
 def home():
     return render_template("home.html")
-    # Display home page with user info if logged in
-    # if session.get("user") is None: 
-    #     render_template("index.html")
-    # else:
-    #     return render_template(
-    #         "index.html",
-    #         session=session.get("user"),
-    #         pretty=json.dumps(session.get("user"), indent=4),
-    #     )
 
 
 @app.route("/callback", methods=["GET", "POST"])
@@ -133,22 +124,10 @@ def profile():
     return render_template("dashboard.html", user=session["user"],cameras = cameras,alerts = alerts)  # Display profile page
 
 
-# @app.route('/camera/update/<camera_id>', methods=['POST'])
-# def update_camera_access(camera_id):
-#     now = datetime.now()
-#     cameras_collection.update_one(
-#         {"camera_id": camera_id},
-#         {"$set": {"last_accessed": now, "image": ""}},
-#         upsert=True
-#     )
-#     return {"status": "success"}, 200
-
-
 @app.route("/camera/live/<int:camera_id>", methods=['GET'])
 def view_camera(camera_id):
-    # Check if user is logged in (i.e., session contains user info)
     if "user" not in session:
-        return redirect(url_for("login"))  # If not logged in, redirect to login
+        return redirect(url_for("login"))
     
     if camera_id is None:
         return "Camera ID is required", 400
@@ -170,8 +149,8 @@ def get_camera_image(camera_id):
 @app.route('/camera/view/<camera_id>', methods=['GET'])
 def view_camera_image(camera_id):
     if "user" not in session:
-        return redirect(url_for("login"))  # If not logged in, redirect to login
-    return render_template("camerastream.html", user=session["user"],camera_id = camera_id)  # Display profile page
+        return redirect(url_for("login"))
+    return render_template("camerastream.html", user=session["user"],camera_id = camera_id)
 
 @app.route('/upload/camera/<int:camera_id>', methods=['POST'])
 def upload(camera_id):
