@@ -3,9 +3,10 @@ from pymongo import MongoClient
 from datetime import datetime, timedelta
 import pytz
 import time
+import os
 
 # MongoDB connection settings
-MONGODB_URI = "mongodb+srv://sydneywilby:csTLuCfjkE3UMd1y@firebotdetection.oiwyq.mongodb.net/?retryWrites=true&w=majority&appName=FireBotDetection"
+MONGODB_URI = os.getenv("MONGODB_URI")
 DATABASE_NAME = "fire_detection"
 COLLECTION_NAME = "alerts"
 

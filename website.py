@@ -30,7 +30,9 @@ app.secret_key = env.get("SECRET_KEY")
 # MongoDB setup
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-uri = "mongodb+srv://sydneywilby:csTLuCfjkE3UMd1y@firebotdetection.oiwyq.mongodb.net/?retryWrites=true&w=majority&appName=FireBotDetection"
+uri = env.get("MONGODB_URI")
+if not uri:
+    raise ValueError("No MONGODB_URI environment variable set")
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
