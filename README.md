@@ -2,7 +2,7 @@
 
 ### What is it?
 
-A secure remote monitoring system for fires, especially wildfires utilising TensorFlow, MongoDB and Auth0. Old devices can be turned into fire recognition sensors and accessed easily using the simple web portal.
+A secure remote monitoring system for fires, especially wildfires utilising TensorFlow, MongoDB and Auth0. It enables old devices to be turned into fire recognition sensors for an automated system which can be easily accessed using the simple web portal.
 
 ### How to use it
 
