@@ -13,3 +13,5 @@ D-Fire.zip
 *.env
 
 .vscode
+
+.env
