@@ -216,6 +216,9 @@ def upload(camera_id):
     
 @app.route('/predict/<camera_id>', methods=['POST'])
 def predict_fire(camera_id):
+    if "user" not in session:
+        return redirect(url_for("login"))
+    
     camera = cameras_collection.find_one({"camera_id": int(camera_id)})
     if camera and camera["image"]:
         # Convert bytes to numpy array for prediction
@@ -223,7 +226,7 @@ def predict_fire(camera_id):
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         
         # Run prediction
-        img_resized = cv2.resize(img, (224, 224)) / (255.0 * 1.5)
+        img_resized = cv2.resize(img, (224, 224)) / (255.0 * 3)
         pred = model.predict(np.expand_dims(img_resized, axis=0))
         pred_prob = float(pred[0][0])
 
